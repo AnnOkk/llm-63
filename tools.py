@@ -1,10 +1,17 @@
-import requests
+import os
 
-URL = 'https://api.apilayer.com/fixer/latest'
-API_KEY = 'uCAYqprVQfjmAkRe1g382BXuus75e9ih'
+import requests
+from dotenv import load_dotenv
+
+load_dotenv()
+
+
+API_KEY = os.environ.get('API_KEY')
+URL = os.environ.get('URL')
 
 if not API_KEY:
     raise RuntimeError('API_KEY not set')
+
 
 def get_exchange_rate(from_currency, to_currency):
     from_currency = from_currency.upper()

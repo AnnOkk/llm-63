@@ -2,10 +2,12 @@ from ollama import chat
 import json
 from tools import TOOLS
 from system_content import SYSTEM_CONTENT
+from dotenv import load_dotenv
 
 
-# URL = 'http://localhost:11434/api/chat'
-MODEL_NAME = 'phi3'
+
+load_dotenv()
+
 
 
 def chat_request(messages):
