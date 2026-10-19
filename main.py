@@ -1,3 +1,5 @@
+import os
+
 from ollama import chat
 import json
 from tools import TOOLS
@@ -7,13 +9,14 @@ from dotenv import load_dotenv
 
 
 load_dotenv()
+model_name = os.environ.get('MODEL_NAME')
 
 
 
 def chat_request(messages):
     full_reply = ''
     try:
-        stream = chat(model=MODEL_NAME, messages=messages,
+        stream = chat(model=model_name, messages=messages,
                    stream=True)
 
         for chunk in stream:
@@ -76,8 +79,12 @@ def main():
             'content': reply
         })
         tool_call = parse_tool_call(reply)
+
         if tool_call:
             tool_result = call_tool(tool_call)
+
+            print('\nDEBUG TOOL RESULT:', repr(tool_result))
+
             if tool_result is not None:
                 messages.append({
                     'role': 'system',
