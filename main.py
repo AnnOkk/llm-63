@@ -40,12 +40,11 @@ def parse_tool_call(text):
     return data if isinstance(data, dict) and 'tool' in data else None
 
 def call_tool(tool_call:dict):
-    # tool_name = TOOLS[tool_call['tool']]
+
     tool_name = TOOLS.get(tool_call.get('tool'))
     if not tool_name:
         return None
-    # return tool_name(**tool_call)
-    # return tool_name(**tool_call.get('arguments',{}))
+
     return tool_name(**tool_call.get('arguments', {}))
 
 
@@ -83,7 +82,6 @@ def main():
         if tool_call:
             tool_result = call_tool(tool_call)
 
-            print('\nDEBUG TOOL RESULT:', repr(tool_result))
 
             if tool_result is not None:
                 messages.append({

@@ -12,8 +12,7 @@ URL = os.environ.get('URL')
 WEATHER_API_KEY = os.environ.get('WEATHER_API_KEY')
 WEATHER_URL = os.environ.get('WEATHER_URL')
 
-print('Key loaded:', bool(WEATHER_API_KEY))
-print('Key length:', len(WEATHER_API_KEY) if WEATHER_API_KEY else 0)
+
 
 if not API_KEY:
     raise RuntimeError('API_KEY not set')
@@ -53,8 +52,7 @@ def get_weather(city):
         return f'Could not reach weather for {city}'
 
     data = response.json()
-    # if response.status_code != 200 or not data.get('success', True):
-    #     return f'Could not reach weather for {city} result of cod is not 200'
+
 
     if response.status_code != 200:
         print('DEBUG STATUS:', response.status_code)
